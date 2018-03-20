@@ -1,0 +1,45 @@
+using System.Xml;
+using System.IO;
+using System.Xml.Serialization;
+
+private void save_xml(string file_path)
+        {
+            FileStream fileStream;
+            StreamWriter streamWriter;
+            XmlTextWriter xmlTextWriter;
+
+
+                try
+                {
+
+                    fileStream = new FileStream(file_path, FileMode.Create, FileAccess.Write, FileShare.None);
+                    streamWriter = new StreamWriter(fileStream);
+                    xmlTextWriter = new XmlTextWriter(streamWriter);
+                    xmlTextWriter.Formatting = Formatting.Indented;
+                    xmlTextWriter.WriteStartDocument();
+                    xmlTextWriter.WriteStartElement("Items");
+
+                        xmlTextWriter.WriteStartElement("Item");
+                        xmlTextWriter.WriteAttributeString("Data1", Data1);
+                        xmlTextWriter.WriteAttributeString("Data2", Data2);
+                        xmlTextWriter.WriteAttributeString("Data3", Data3);
+                        xmlTextWriter.WriteAttributeString("Data4", Data4);
+                        xmlTextWriter.WriteAttributeString("Data5", Data5);
+                        xmlTextWriter.WriteAttributeString("Data6", Data6);
+                        xmlTextWriter.WriteAttributeString("Data7", Data7);
+                        xmlTextWriter.WriteEndElement();
+                    
+
+                    xmlTextWriter.WriteEndDocument();
+                    xmlTextWriter.Flush();
+                    xmlTextWriter.Close();
+
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+
+                }
+            
+        }
